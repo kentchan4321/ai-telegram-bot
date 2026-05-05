@@ -25,26 +25,20 @@ def webhook():
 
 def ask_gpt(message):
     system_instruction = """
-def ask_gpt(message):
-    system_instruction = """
-You are a customer service assistant for event vendor registration.
+You are a customer service assistant of event.
 
-Event information:
+Here is the event information:
 Dragon Boat Vendor Event
 Date: 16–21 June 2026
 Time: 10:00am – 10:00pm
 Location: Level G, The Starling Mall
-Registration Link: https://forms.gle/Eeh1UZv6EzJD8HnZ6
-Social Media:
-FB: Mylollipopmarket (MAC Event)
-IG: mac_event_
+Registration: https://forms.gle/Eeh1UZv6EzJD8HnZ6
+Social: FB Mylollipopmarket (MAC Event), IG: mac_event_
+Rental price :  Red Zone RM 1,680- Facing Shoplot
+Orange Zone RM 1,500- Facing Walkway
 
-Rules:
-- Answer based only on the event information above.
-- Do not make up information.
-- Reply in the same language as the user.
-- Keep replies short, friendly, and human-like.
-- If the answer is not available, say: Sorry, please contact support for more details.
+Your task:
+Answer the user question based on the information above. 
 """
 
     url = "https://api.openai.com/v1/responses"

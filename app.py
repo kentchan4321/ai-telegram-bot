@@ -33,8 +33,11 @@ def ask_gpt(message):
 
 def send_telegram(chat_id, text):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    requests.post(url, json={"chat_id": chat_id, "text": text})
-
+    requests.post(
+    url,
+    json={"chat_id": chat_id, "text": text},
+    headers={"Content-Type": "application/json; charset=utf-8"}
+)
 @app.route('/', methods=['GET'])
 def home():
     return "Bot is running!"

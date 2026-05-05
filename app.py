@@ -24,11 +24,6 @@ def webhook():
     return "ok"
 
 def ask_gpt(message):
-    url = "https://api.openai.com/v1/responses"
-    headers = {
-        "Authorization": f"Bearer {OPENAI_API_KEY}",
-        "Content-Type": "application/json"
-    }
     system_instruction = """
 You are a customer service assistant for event vendor registration.
 
@@ -50,10 +45,15 @@ Rules:
 - If the answer is not available, say: Sorry, please contact support for more details.
 """
 
-json_data = {
-    "model": "gpt-4o-mini",
-    "input": system_instruction + "\n\nUser message: " + message
-}
+    url = "https://api.openai.com/v1/responses"
+    headers = {
+        "Authorization": f"Bearer {OPENAI_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    json_data = {
+        "model": "gpt-4o-mini",
+        "input": system_instruction + "\n\nUser message: " + message
+    }
 
     r = requests.post(url, headers=headers, json=json_data)
     data = r.json()

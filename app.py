@@ -14,7 +14,6 @@ def home():
 @app.route("/", methods=["POST"])
 def webhook():
     data = request.json
-
     message = data["message"]["text"]
     chat_id = data["message"]["chat"]["id"]
 
@@ -29,8 +28,8 @@ You are a customer service assistant for event vendor registration.
 
 Event information:
 Dragon Boat Vendor Event
-Date: 16–21 June 2026
-Time: 10:00am – 10:00pm
+Date: 16-21 June 2026
+Time: 10:00am - 10:00pm
 Location: Level G, The Starling Mall
 Registration Link: https://forms.gle/Eeh1UZv6EzJD8HnZ6
 Social Media:
@@ -57,22 +56,6 @@ Rules:
 
     r = requests.post(url, headers=headers, json=json_data)
     data = r.json()
-    return data["output"][0]["content"][0]["text"]
-"""
-
-    url = "https://api.openai.com/v1/responses"
-    headers = {
-        "Authorization": f"Bearer {OPENAI_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    json_data = {
-        "model": "gpt-4o-mini",
-        "input": system_instruction + "\n\nUser message: " + message
-    }
-
-    r = requests.post(url, headers=headers, json=json_data)
-    data = r.json()
-
     return data["output"][0]["content"][0]["text"]
 
 def send_telegram(chat_id, text):

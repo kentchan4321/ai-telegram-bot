@@ -29,10 +29,31 @@ def ask_gpt(message):
         "Authorization": f"Bearer {OPENAI_API_KEY}",
         "Content-Type": "application/json"
     }
-    json_data = {
-        "model": "gpt-4o-mini",
-        "input": message
-    }
+    system_instruction = """
+You are a customer service assistant for event vendor registration.
+
+Event information:
+Dragon Boat Vendor Event
+Date: 16–21 June 2026
+Time: 10:00am – 10:00pm
+Location: Level G, The Starling Mall
+Registration Link: https://forms.gle/Eeh1UZv6EzJD8HnZ6
+Social Media:
+FB: Mylollipopmarket (MAC Event)
+IG: mac_event_
+
+Rules:
+- Answer based only on the event information above.
+- Do not make up information.
+- Reply in the same language as the user.
+- Keep replies short, friendly, and human-like.
+- If the answer is not available, say: Sorry, please contact support for more details.
+"""
+
+json_data = {
+    "model": "gpt-4o-mini",
+    "input": system_instruction + "\n\nUser message: " + message
+}
 
     r = requests.post(url, headers=headers, json=json_data)
     data = r.json()

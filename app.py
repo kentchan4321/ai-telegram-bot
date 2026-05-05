@@ -29,7 +29,8 @@ def ask_gpt(message):
         "input": message
     }
     r = requests.post(url, headers=headers, json=json_data)
-    return r.json()["output_text"]
+    data = r.json()
+return data["output"][0]["content"][0]["text"]
 
 def send_telegram(chat_id, text):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"

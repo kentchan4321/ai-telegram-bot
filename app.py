@@ -25,6 +25,8 @@ def webhook():
 
 def ask_gpt(message):
     system_instruction = """
+def ask_gpt(message):
+    system_instruction = """
 You are a customer service assistant for event vendor registration.
 
 Event information:
@@ -43,6 +45,22 @@ Rules:
 - Reply in the same language as the user.
 - Keep replies short, friendly, and human-like.
 - If the answer is not available, say: Sorry, please contact support for more details.
+"""
+
+    url = "https://api.openai.com/v1/responses"
+    headers = {
+        "Authorization": f"Bearer {OPENAI_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    json_data = {
+        "model": "gpt-4o-mini",
+        "input": system_instruction + "\n\nUser message: " + message
+    }
+
+    r = requests.post(url, headers=headers, json=json_data)
+    data = r.json()
+
+    return data["output"][0]["content"][0]["text"]
 """
 
     url = "https://api.openai.com/v1/responses"
